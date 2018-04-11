@@ -37,18 +37,21 @@ vehicles_1997$average <- (vehicles_1997$cty + vehicles_1997$hwy) / 2
 # Filter the whole vehicles data set for 2-Wheel Drive vehicles that get more
 # than 20 miles/gallon in the city. 
 # Save this new data frame in a variable.
-
+two_wheel_20_mpg <- vehicles[vehicles$drive == '2-Wheel Drive' & vehicles$cty > 20,]
 
 # Of the above vehicles, what is the vehicle ID of the vehicle with the worst 
 # hwy mpg?
 # Hint: filter for the worst vehicle, then select its ID.
-
+worst_hwy <- two_wheel_20_mpg[two_wheel_20_mpg$hwy == min(two_wheel_20_mpg$hwy), "id"]
 
 # Write a function that takes a `year_choice` and a `make_choice` as parameters, 
 # and returns the vehicle model that gets the most hwy miles/gallon of vehicles 
 # of that make in that year.
 # You'll need to filter more (and do some selecting)!
-
+make_year_filter <- function(year_choice, make_choice) {
+  filtered <- vehicles[vehicles$year == year_choice & vehicles$make == make_choice, ]
+  filtered[filtered$hwy == max(filtered$hwy), "model"]
+}
 
 # What was the most efficient Honda model of 1995?
-
+make_year_filter("Honda", 1995)
