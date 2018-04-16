@@ -50,3 +50,10 @@ mean(ny_to_sea$change_while_fly, na.rm = TRUE)
 # Consider flights from JFK to SEA. What was the average, min, and max air time
 # of those flights? Bonus: use pipes to answer this question in one statement
 # (without showing any other data)!
+summary <- flights %>% 
+  filter(origin == "JFK", dest == "SEA") %>%
+  summarise(
+    avg_time = mean(change_while_fly, na.rm = TRUE),
+    min_time = min(change_while_fly, na.rm = TRUE),
+    max_time = max(change_while_fly, na.rm = TRUE)
+  )
